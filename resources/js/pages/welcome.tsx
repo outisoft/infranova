@@ -60,7 +60,7 @@ export default function Welcome() {
 
     return (
         <>
-            <Head title="Infranova - Seguridad y Tecnología">
+            <Head title="OaSysRed - Seguridad y Tecnología">
                 <meta
                     name="description"
                     content="Expertos en instalación, mantenimiento y soporte de equipos de CCTV, redes, control de accesos y domótica."
@@ -74,7 +74,7 @@ export default function Welcome() {
                         <div className="flex items-center gap-2">
                             <Shield className="h-8 w-8 text-blue-500" />
                             <span className="text-xl font-bold tracking-tight text-white">
-                                INFRANOVA
+                                OaSysRed
                             </span>
                         </div>
 
