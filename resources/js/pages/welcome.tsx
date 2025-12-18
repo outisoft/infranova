@@ -1,4 +1,4 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import {
     Activity,
     Camera,
@@ -15,9 +15,17 @@ import {
 import { useState } from 'react';
 
 export default function Welcome() {
+    const { flash } = usePage().props as any;
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+    const { data, setData, post, processing, errors, reset } = useForm({
+        name: '',
+        email: '',
+        phone: '',
+        message: '',
+    });
 
     const services = [
         {
@@ -57,6 +65,16 @@ export default function Welcome() {
             icon: <Cpu className="h-8 w-8 text-blue-500" />,
         },
     ];
+
+    const submit = (e: React.FormEvent) => {
+        e.preventDefault();
+        
+        // Enviamos a la ruta que definimos en Laravel (routes/web.php)
+        post('/enviar-cotizacion', {
+            preserveScroll: true,
+            onSuccess: () => reset(), // Limpia el formulario si todo sale bien
+        });
+    };
 
     return (
         <>
@@ -306,88 +324,94 @@ export default function Welcome() {
                                     <h3 className="mb-6 text-2xl font-bold text-slate-900">
                                         Envíenos un mensaje
                                     </h3>
-                                    <form
-                                        onSubmit={(e) => {
-                                            e.preventDefault();
-                                            alert(
-                                                'Gracias por su mensaje. Nos pondremos en contacto pronto.',
-                                            );
-                                        }}
-                                        className="space-y-5"
-                                    >
+                                    {flash?.success && (
+                                        <div className="mb-6 rounded-lg bg-green-50 p-4 text-green-800 border border-green-200">
+                                            <strong className="font-bold">¡Enviado!</strong> {flash.success}
+                                        </div>
+                                    )}
+                                    <form onSubmit={submit} className="space-y-5">
+                                        {/* NOMBRE */}
                                         <div>
-                                            <label
-                                                htmlFor="name"
-                                                className="mb-1 block text-sm font-semibold text-slate-700"
-                                            >
+                                            <label htmlFor="name" className="mb-1 block text-sm font-semibold text-slate-700">
                                                 Nombre Completo
                                             </label>
                                             <input
                                                 type="text"
                                                 id="name"
-                                                name="name"
-                                                required
-                                                className="block w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 transition-colors focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
+                                                value={data.name}
+                                                onChange={(e) => setData('name', e.target.value)}
+                                                disabled={processing}
+                                                className={`block w-full rounded-lg border bg-slate-50 px-4 py-3 text-slate-900 transition-colors focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 
+                                                    ${errors.name ? 'border-red-500 focus:border-red-500' : 'border-slate-200 focus:border-blue-500'}`}
                                                 placeholder="Juan Pérez"
                                             />
+                                            {/* Mensaje de error de validación */}
+                                            {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
                                         </div>
 
+                                        {/* EMAIL */}
                                         <div>
-                                            <label
-                                                htmlFor="email"
-                                                className="mb-1 block text-sm font-semibold text-slate-700"
-                                            >
+                                            <label htmlFor="email" className="mb-1 block text-sm font-semibold text-slate-700">
                                                 Correo Electrónico
                                             </label>
                                             <input
                                                 type="email"
                                                 id="email"
-                                                name="email"
-                                                required
-                                                className="block w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 transition-colors focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
+                                                value={data.email}
+                                                onChange={(e) => setData('email', e.target.value)}
+                                                disabled={processing}
+                                                className={`block w-full rounded-lg border bg-slate-50 px-4 py-3 text-slate-900 transition-colors focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 
+                                                    ${errors.email ? 'border-red-500 focus:border-red-500' : 'border-slate-200 focus:border-blue-500'}`}
                                                 placeholder="juan@ejemplo.com"
                                             />
+                                            {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
                                         </div>
 
+                                        {/* TELEFONO */}
                                         <div>
-                                            <label
-                                                htmlFor="phone"
-                                                className="mb-1 block text-sm font-semibold text-slate-700"
-                                            >
+                                            <label htmlFor="phone" className="mb-1 block text-sm font-semibold text-slate-700">
                                                 Teléfono
                                             </label>
                                             <input
                                                 type="tel"
                                                 id="phone"
-                                                name="phone"
-                                                className="block w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 transition-colors focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
+                                                value={data.phone}
+                                                onChange={(e) => setData('phone', e.target.value)}
+                                                disabled={processing}
+                                                className={`block w-full rounded-lg border bg-slate-50 px-4 py-3 text-slate-900 transition-colors focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 
+                                                    ${errors.phone ? 'border-red-500 focus:border-red-500' : 'border-slate-200 focus:border-blue-500'}`}
                                                 placeholder="+1 (555) 000-0000"
                                             />
+                                            {errors.phone && <p className="mt-1 text-sm text-red-500">{errors.phone}</p>}
                                         </div>
 
+                                        {/* MENSAJE */}
                                         <div>
-                                            <label
-                                                htmlFor="message"
-                                                className="mb-1 block text-sm font-semibold text-slate-700"
-                                            >
+                                            <label htmlFor="message" className="mb-1 block text-sm font-semibold text-slate-700">
                                                 Mensaje
                                             </label>
                                             <textarea
                                                 id="message"
-                                                name="message"
                                                 rows={4}
-                                                required
-                                                className="block w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 transition-colors focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
+                                                value={data.message}
+                                                onChange={(e) => setData('message', e.target.value)}
+                                                disabled={processing}
+                                                className={`block w-full rounded-lg border bg-slate-50 px-4 py-3 text-slate-900 transition-colors focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 
+                                                    ${errors.message ? 'border-red-500 focus:border-red-500' : 'border-slate-200 focus:border-blue-500'}`}
                                                 placeholder="¿En qué podemos ayudarle?"
                                             />
+                                            {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
                                         </div>
 
+                                        {/* BOTÓN SUBMIT */}
                                         <div className="pt-2">
                                             <button
                                                 type="submit"
-                                                className="flex w-full justify-center rounded-lg bg-blue-600 px-4 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-500/30 transition-all hover:bg-blue-500 hover:shadow-blue-500/50 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+                                                disabled={processing} // Deshabilita el botón mientras envía
+                                                className={`flex w-full justify-center rounded-lg bg-blue-600 px-4 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-500/30 transition-all focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none 
+                                                    ${processing ? 'opacity-70 cursor-wait' : 'hover:bg-blue-500 hover:shadow-blue-500/50'}`}
                                             >
-                                                Enviar Mensaje
+                                                {processing ? 'Enviando...' : 'Enviar Mensaje'}
                                             </button>
                                         </div>
                                     </form>
