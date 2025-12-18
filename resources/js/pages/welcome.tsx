@@ -490,10 +490,10 @@ export default function Welcome() {
                                                 Teléfono
                                             </h4>
                                             <p className="mt-1 text-blue-100">
-                                                +1 (234) 567-890
+                                                +52 1 241 140 5420
                                             </p>
                                             <p className="text-sm text-blue-200">
-                                                Lunes a Viernes, 9am - 6pm
+                                                Lunes a Sabado, 9am - 6pm
                                             </p>
                                         </div>
                                     </div>
@@ -520,10 +520,10 @@ export default function Welcome() {
                                                 Correo Electrónico
                                             </h4>
                                             <p className="mt-1 text-blue-100">
-                                                contacto@infranova.com
+                                                sales@oasysred.com
                                             </p>
                                             <p className="text-blue-100">
-                                                soporte@infranova.com
+                                                support@oasysred.com
                                             </p>
                                         </div>
                                     </div>
