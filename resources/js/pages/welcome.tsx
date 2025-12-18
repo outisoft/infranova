@@ -541,7 +541,7 @@ export default function Welcome() {
                                 <div className="mb-4 flex items-center justify-center gap-2 md:justify-start">
                                     <Shield className="h-6 w-6 text-blue-500" />
                                     <span className="text-lg font-bold text-white">
-                                        INFRANOVA
+                                        OASYSRED
                                     </span>
                                 </div>
                                 <p className="max-w-xs text-sm text-slate-500">
@@ -563,25 +563,35 @@ export default function Welcome() {
                             </div>
                             <div>
                                 <h4 className="mb-4 font-semibold text-white">
-                                    Contacto
+                                    Soporte
                                 </h4>
                                 <ul className="space-y-2 text-sm text-slate-500">
-                                    <li>contacto@infranova.com</li>
+                                    <li>support@oasysred.com</li>
                                     <li>+1 (234) 567-890</li>
                                     <li>Ciudad, País</li>
                                 </ul>
                             </div>
                         </div>
                         <div className="mt-12 border-t border-slate-900 pt-8 text-center text-sm text-slate-600">
-                            &copy; {new Date().getFullYear()} Infranova. Todos
-                            los derechos reservados.
+                            <p>&copy; {new Date().getFullYear()} Oasysred. Todos los derechos reservados.</p>
+                            <p className="mt-2">
+                                Pagina Diseñada por{' '}
+                                <a 
+                                    href="https://outisoft.com" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="font-medium hover:text-blue-400 transition-colors"
+                                >
+                                    Outisoft
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </footer>
 
                 {/* Floating WhatsApp Button */}
                 <a
-                    href="https://wa.me/1234567890"
+                    href="https://wa.me/5212411405420"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="fixed bottom-6 right-6 z-50 transition-transform hover:scale-110 focus:outline-none"
