@@ -245,7 +245,7 @@ export default function Welcome() {
                         <div className="grid items-center gap-12 lg:grid-cols-2">
                             <div>
                                 <h2 className="mb-6 text-3xl font-bold text-white sm:text-4xl">
-                                    ¿Por qué elegir Infranova?
+                                    ¿Por qué elegir Oasysred?
                                 </h2>
                                 <p className="mb-8 text-lg text-slate-400">
                                     Nos destacamos por nuestro compromiso con la
@@ -460,10 +460,9 @@ export default function Welcome() {
                                                 Dirección
                                             </h4>
                                             <p className="mt-1 text-blue-100">
-                                                Av. Principal 123, Edificio
-                                                Tecnológico
+                                                Puerto Maya, Solidaridad.
                                                 <br />
-                                                Ciudad, País 12345
+                                                Quintana Roo, México 77733
                                             </p>
                                         </div>
                                     </div>
@@ -490,7 +489,7 @@ export default function Welcome() {
                                                 Teléfono
                                             </h4>
                                             <p className="mt-1 text-blue-100">
-                                                +52 1 241 140 5420
+                                                +52 984-207-7903
                                             </p>
                                             <p className="text-sm text-blue-200">
                                                 Lunes a Sabado, 9am - 6pm
